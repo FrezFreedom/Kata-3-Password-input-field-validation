@@ -3,12 +3,12 @@ class ValidationResult:
     __valid: bool;
     __errorMessages: list;
 
-    def __init__(valid: bool = False, errorMessages: list = []):
-        this.__valid = valid
-        this.__errorMessages = errorMessages
+    def __init__(self, valid: bool = False, errorMessages: list = []):
+        self.__valid = valid
+        self.__errorMessages = errorMessages
 
-    def isValid():
+    def isValid(self):
         return self.__valid
 
-    def getErrorMessages():
+    def getErrorMessages(self):
         return '\n'.join(self.__errorMessages)

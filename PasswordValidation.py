@@ -9,5 +9,5 @@ class PasswordValidator:
     CAPITAL_CHARACTER_ERROR: str = 'password must contain at least one capital letter'
     SPECIAL_CHARACTER_ERROR: str = 'password must contain at least one special character'
     
-    def validate(validationData: ValidationData) -> ValidationResult:
+    def validate(self, validationData: ValidationData) -> ValidationResult:
         return ValidationResult(False, [])

@@ -10,4 +10,16 @@ class PasswordValidator:
     SPECIAL_CHARACTER_ERROR: str = 'password must contain at least one special character'
     
     def validate(self, validationData: ValidationData) -> ValidationResult:
-        return ValidationResult(False, [])
+        validPassword: bool = True
+        errorMessages: list = []
+        password = validationData.password
+
+        if not self.passwordHasMoreThanSevenCharacter(password):
+            validPassword = False
+            errorMessages.append(self.SIZE_ERROR)
+
+        return ValidationResult(validPassword, errorMessages)
+
+    def passwordHasMoreThanSevenCharacter(self, password: str):
+        return len(password) > 7
+    

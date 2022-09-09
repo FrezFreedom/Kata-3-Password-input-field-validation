@@ -5,7 +5,7 @@ from ValidationResult import ValidationResult
 class PasswordValidator:
 
     SIZE_ERROR: str = 'Password must be at least 8 characters'
-    TWO_NUMBERS_ERROR: str = 'The password must contain at least 2 numbers'
+    TWO_NUMERIC_ERROR: str = 'The password must contain at least 2 numbers'
     MINIMUM_SIZE = 8
     MINIMUM_NUMERIC_CHARACTER = 2
 
@@ -17,16 +17,16 @@ class PasswordValidator:
         if not self.passwordHasMinimumSize(password):
             validPassword = False
             errorMessages.append(self.SIZE_ERROR)
-        if not self.passwordHasAtLeastMinimumNumberCharacter(password):
+        if not self.passwordHasAtLeastMinimumNumericCharacter(password):
             validPassword = False
-            errorMessages.append(self.TWO_NUMBERS_ERROR)
+            errorMessages.append(self.TWO_NUMERIC_ERROR)
 
         return ValidationResult(validPassword, errorMessages)
 
     def passwordHasMinimumSize(self, password: str):
         return len(password) >= self.MINIMUM_SIZE
 
-    def passwordHasAtLeastMinimumNumberCharacter(self, password:str):
+    def passwordHasAtLeastMinimumNumericCharacter(self, password:str):
         numberOfNumericCharacters = 0
         for character in password:
             if character.isdigit():

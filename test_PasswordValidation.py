@@ -17,16 +17,16 @@ def test_ShouldReturnValidSize_whenPasswordHasMinimumSize():
     assert validationResult.isValid() == True
     assert PasswordValidator.SIZE_ERROR not in validationResult.getErrorMessages()
 
-def test_ShouldReturnValidPassword_whenPasswordHasAtLeastTwoNumberCharacter():
+def test_ShouldReturnValidPassword_whenPasswordHasAtLeastTwoNumericCharacter():
     validationData = ValidationData("AbcdefG1G2")
     passwordValidator = PasswordValidator()
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == True
-    assert PasswordValidator.TWO_NUMBERS_ERROR not in validationResult.getErrorMessages()
+    assert PasswordValidator.TWO_NUMERIC_ERROR not in validationResult.getErrorMessages()
 
-def test_ShouldReturnInvalidPassword_whenPasswordHasLessThanTwoNumberCharacter():
+def test_ShouldReturnInvalidPassword_whenPasswordHasLessThanTwoNumericCharacter():
     validationData = ValidationData("AbcdefG1GG")
     passwordValidator = PasswordValidator()
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == False
-    assert PasswordValidator.TWO_NUMBERS_ERROR in validationResult.getErrorMessages()
+    assert PasswordValidator.TWO_NUMERIC_ERROR in validationResult.getErrorMessages()

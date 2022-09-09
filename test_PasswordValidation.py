@@ -44,3 +44,17 @@ def test_ShouldReturnInvalidPassword_whenPasswordHasNotAtCapitalCharacter():
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == False
     assert PasswordValidator.CAPITAL_CHARACTER_ERROR in validationResult.getErrorMessages()
+
+def test_ShouldReturnValidPassword_whenPasswordHasAtLeastOneSpecialCharacter():
+    validationData = ValidationData("Abcde@ghij12")
+    passwordValidator = PasswordValidator()
+    validationResult = passwordValidator.validate(validationData)
+    assert validationResult.isValid() == True
+    assert PasswordValidator.SPECIAL_CHARACTER_ERROR not in validationResult.getErrorMessages()
+
+def test_ShouldReturnInvalidPassword_whenPasswordHasNotSpecialCharacter():
+    validationData = ValidationData("abcdeghij12")
+    passwordValidator = PasswordValidator()
+    validationResult = passwordValidator.validate(validationData)
+    assert validationResult.isValid() == False
+    assert PasswordValidator.SPECIAL_CHARACTER_ERROR in validationResult.getErrorMessages()

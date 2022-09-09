@@ -30,3 +30,17 @@ def test_ShouldReturnInvalidPassword_whenPasswordHasLessThanTwoNumericCharacter(
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == False
     assert PasswordValidator.TWO_NUMERIC_ERROR in validationResult.getErrorMessages()
+
+def test_ShouldReturnValidPassword_whenPasswordHasAtLeastOneCapitalCharacter():
+    validationData = ValidationData("Abcdefghij")
+    passwordValidator = PasswordValidator()
+    validationResult = passwordValidator.validate(validationData)
+    assert validationResult.isValid() == True
+    assert PasswordValidator.CAPITAL_CHARACTER_ERROR not in validationResult.getErrorMessages()
+
+def test_ShouldReturnInvalidPassword_whenPasswordHasNotAtCapitalCharacter():
+    validationData = ValidationData("abcdefghij")
+    passwordValidator = PasswordValidator()
+    validationResult = passwordValidator.validate(validationData)
+    assert validationResult.isValid() == False
+    assert PasswordValidator.CAPITAL_CHARACTER_ERROR in validationResult.getErrorMessages()

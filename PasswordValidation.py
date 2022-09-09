@@ -10,6 +10,9 @@ class PasswordValidator:
     NUMERIC_CHARACTER_ERROR: str = "The password must contain at least {MINIMUM_NUMERIC_CHARACTER} numbers"
     MINIMUM_CAPITAL_CHARACTER = 1
     CAPITAL_CHARACTER_ERROR: str = "password must contain at least {MINIMUM_CAPITAL_CHARACTER} capital letter"
+    MINIMUM_SPECIAL_CHARACTER = 1
+    SPECIAL_CHARACTER_ERROR: str = "password must contain at least {MINIMUM_SPECIAL_CHARACTER} special character"
+    SPECIAL_CHARACTERS = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
     def validate(self, validationData: ValidationData) -> ValidationResult:
         validPassword: bool = True
@@ -26,6 +29,10 @@ class PasswordValidator:
         if not self.passwordHasAtLeastMinimumCapitalCharacter(password):
             validPassword = False
             errorMessages.append(self.CAPITAL_CHARACTER_ERROR)
+        
+        if not self.passwordHasAtLeastMinimumSpecialCharacter(password):
+            validPassword = False
+            errorMessages.append(self.SPECIAL_CHARACTER_ERROR)
 
         return ValidationResult(validPassword, errorMessages)
 
@@ -47,4 +54,12 @@ class PasswordValidator:
                 numberOfCapitalCharacters += 1
 
         return numberOfCapitalCharacters >= self.MINIMUM_CAPITAL_CHARACTER
+
+    def passwordHasAtLeastMinimumSpecialCharacter(self, password: str):
+        numberOfSpecialCharacters = 0
+        for character in password:
+            if character in self.SPECIAL_CHARACTERS:
+                numberOfSpecialCharacters += 1
+        
+        return numberOfSpecialCharacters >= self.MINIMUM_SPECIAL_CHARACTER
     

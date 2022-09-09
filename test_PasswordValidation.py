@@ -22,14 +22,14 @@ def test_ShouldReturnValidPassword_whenPasswordHasAtLeastTwoNumericCharacter():
     passwordValidator = PasswordValidator()
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == True
-    assert PasswordValidator.TWO_NUMERIC_ERROR not in validationResult.getErrorMessages()
+    assert PasswordValidator.NUMERIC_CHARACTER_ERROR not in validationResult.getErrorMessages()
 
 def test_ShouldReturnInvalidPassword_whenPasswordHasLessThanTwoNumericCharacter():
     validationData = ValidationData("Abcde@G1GG")
     passwordValidator = PasswordValidator()
     validationResult = passwordValidator.validate(validationData)
     assert validationResult.isValid() == False
-    assert PasswordValidator.TWO_NUMERIC_ERROR in validationResult.getErrorMessages()
+    assert PasswordValidator.NUMERIC_CHARACTER_ERROR in validationResult.getErrorMessages()
 
 def test_ShouldReturnValidPassword_whenPasswordHasAtLeastOneCapitalCharacter():
     validationData = ValidationData("Abcde@ghij12")

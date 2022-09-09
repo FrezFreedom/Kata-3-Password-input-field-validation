@@ -4,13 +4,12 @@ from ValidationResult import ValidationResult
 
 class PasswordValidator:
 
-
-    SIZE_ERROR: str = 'Password must be at least 8 characters'
-    TWO_NUMERIC_ERROR: str = 'The password must contain at least 2 numbers'
-    CAPITAL_CHARACTER_ERROR: str = 'password must contain at least 1 capital letter'
     MINIMUM_SIZE = 8
+    SIZE_ERROR: str = "Password must be at least {MINIMUM_SIZE} characters"
     MINIMUM_NUMERIC_CHARACTER = 2
+    NUMERIC_CHARACTER_ERROR: str = "The password must contain at least {MINIMUM_NUMERIC_CHARACTER} numbers"
     MINIMUM_CAPITAL_CHARACTER = 1
+    CAPITAL_CHARACTER_ERROR: str = "password must contain at least {MINIMUM_CAPITAL_CHARACTER} capital letter"
 
     def validate(self, validationData: ValidationData) -> ValidationResult:
         validPassword: bool = True
@@ -22,7 +21,7 @@ class PasswordValidator:
             errorMessages.append(self.SIZE_ERROR)
         if not self.passwordHasAtLeastMinimumNumericCharacter(password):
             validPassword = False
-            errorMessages.append(self.TWO_NUMERIC_ERROR)
+            errorMessages.append(self.NUMERIC_CHARACTER_ERROR)
         
         if not self.passwordHasAtLeastMinimumCapitalCharacter(password):
             validPassword = False
